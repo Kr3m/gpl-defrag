@@ -895,6 +895,12 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 
 	client = targ->client;
 
+	if( g_gametype.integer == GT_RUN ) {
+		if ( attacker != targ ) {
+			return;
+		}
+	}
+
 	if ( client ) {
 		if ( client->noclip ) {
 			return;
@@ -993,7 +999,7 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 	}
 
 	if ( damage < 1 ) {
-		damage = 0;
+		damage = 1;
 	}
 	take = damage;
 
